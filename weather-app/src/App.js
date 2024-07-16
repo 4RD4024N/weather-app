@@ -16,7 +16,7 @@ const App = () => {
     }
 
     try {
-      const apiKey = 'ff5480cd288658b09a27570b7ab2f601'; // OpenWeatherMap API key
+      const apiKey = 'YOUR_OPENWEATHERMAP_KEY'; // OpenWeatherMap API key
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}&lang=tr`
       );
@@ -46,7 +46,7 @@ const App = () => {
   const loadMap = (lat, lon) => {
     if (!window.google) {
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBU6jF3qbELVW-7FgBcZNEgh3x4IDNW14M`; // Google Maps API key
+      script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_KEY`; // Google Maps API key
       script.async = true;
       document.head.appendChild(script);
 
