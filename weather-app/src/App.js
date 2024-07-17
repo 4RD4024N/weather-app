@@ -155,7 +155,7 @@ const App = () => {
   };
 
   const getCitySuggestions = async (input) => {
-    const apiKey = 'ff5480cd288658b09a27570b7ab2f601'; // OpenWeatherMap API key
+    const apiKey = 'YOUR_KEY'; // OpenWeatherMap API key
     const response = await axios.get(
       `https://api.openweathermap.org/data/2.5/find`, {
         params: {
