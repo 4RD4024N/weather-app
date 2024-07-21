@@ -9,6 +9,7 @@ const App = () => {
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [markerDetails, setMarkerDetails] = useState({});
+  const [placesService, setPlacesService] = useState(null);
 
   useEffect(() => {
     if (weather && weather.city) {
@@ -19,7 +20,7 @@ const App = () => {
   const loadMap = (lat, lon) => {
     if (!window.google) {
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`; // Google Maps API key
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places`; 
       script.async = true;
       script.onload = () => initializeMap(lat, lon);
       document.head.appendChild(script);
@@ -32,10 +33,13 @@ const App = () => {
     const mapElement = document.getElementById('map');
     if (mapElement) {
       const newMap = new window.google.maps.Map(mapElement, {
-        zoom: 8,
+        zoom: 12,
         center: { lat, lng: lon },
       });
       setMap(newMap);
+
+      const service = new window.google.maps.places.PlacesService(newMap);
+      setPlacesService(service);
 
       // Harita üzerine tıklanabilirlik ekleyin
       newMap.addListener('click', (event) => {
@@ -125,15 +129,60 @@ const App = () => {
     }
   };
 
+  const removeAllMarkers = () => {
+    markers.forEach(({ marker }) => marker.setMap(null));
+    setMarkers([]);
+    setMarkerDetails({});
+  };
+
+  const searchNearbyPlaces = (type) => {
+    if (!placesService || !map) return;
+
+    const request = {
+      location: map.getCenter(),
+      radius: '5000',
+      type: [type],
+    };
+
+    placesService.nearbySearch(request, (results, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        results.forEach((place) => {
+          addPlaceMarker(place);
+        });
+      }
+    });
+  };
+
+  const addPlaceMarker = (place) => {
+    const placeMarker = new window.google.maps.Marker({
+      position: place.geometry.location,
+      map: map,
+      title: place.name,
+    });
+
+    const placeInfoWindow = new window.google.maps.InfoWindow({
+      content: `<div><strong>${place.name}</strong><br>${place.vicinity}</div>`,
+    });
+
+    placeMarker.addListener('click', () => {
+      placeInfoWindow.open(map, placeMarker);
+    });
+
+    setMarkers((prevMarkers) => [...prevMarkers, { id: place.place_id, marker: placeMarker, infoWindow: placeInfoWindow }]);
+  };
+
   return (
     <div className="App">
       <div className="weather-container">
         <h1>Hava Durumu Uygulaması</h1>
         <CityInput />
         <Weather />
+        <button onClick={() => searchNearbyPlaces('hotel')}>Otelleri Göster</button>
+        <button onClick={() => searchNearbyPlaces('gas_station')}>Benzin İstasyonlarını Göster</button>
       </div>
       <div className="map-container">
-        <div id="map" style={{ height: '500px', width: '100%' }}></div>
+        <div id="map"></div>
+        <button onClick={removeAllMarkers} style={{ position: 'absolute', top: 10, right: 10, zIndex: 1 }}>Tüm Markerları Kaldır</button>
       </div>
       {markers.map(({ id }) => (
         <div key={id}>
