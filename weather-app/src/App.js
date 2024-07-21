@@ -19,7 +19,7 @@ const App = () => {
   const loadMap = (lat, lon) => {
     if (!window.google) {
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDqjtcQ9tkJrQBCbXwm4txw9_oEmFnEa9o`; // Google Maps API key
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`; // Google Maps API key
       script.async = true;
       script.onload = () => initializeMap(lat, lon);
       document.head.appendChild(script);

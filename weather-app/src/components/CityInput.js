@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCity, setSuggestions, clearError, fetchWeather, fetchCityInfo,setError } from '../weatherSlice';
+import { setCity, setSuggestions, clearError, fetchWeather, fetchCityInfo, setError } from '../weatherSlice';
 import { debounce } from 'lodash';
 import axios from 'axios';
 import '../CityInput.css';
@@ -10,28 +10,33 @@ const CityInput = () => {
   const { city, suggestions, error } = useSelector((state) => state.weather);
 
   const getCitySuggestions = async (input) => {
-    const apiKey = 'b6162f2b1c4d6995bc1fce721b18a63e';
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/find`, {
-        params: {
-          q: input,
-          type: 'like',
-          sort: 'population',
-          cnt: 5,
-          appid: apiKey
+    const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_KEY; // Çevresel değişkeni doğrudan kullanın
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/find`, {
+          params: {
+            q: input,
+            type: 'like',
+            sort: 'population',
+            cnt: 5,
+            appid: apiKey
+          }
         }
-      }
-    );
-
-    if (response.data.cod === '200') {
-      const uniqueSuggestions = response.data.list.filter((value, index, self) => 
-        index === self.findIndex((t) => (
-          t.name === value.name && t.sys.country === value.sys.country
-        ))
       );
-      dispatch(setSuggestions(uniqueSuggestions));
-    } else {
-      dispatch(setSuggestions([]));
+
+      if (response.data.cod === '200') {
+        const uniqueSuggestions = response.data.list.filter((value, index, self) => 
+          index === self.findIndex((t) => (
+            t.name === value.name && t.sys.country === value.sys.country
+          ))
+        );
+        dispatch(setSuggestions(uniqueSuggestions));
+      } else {
+        dispatch(setSuggestions([]));
+      }
+    } catch (error) {
+      console.error("API request error:", error);
+      dispatch(setError(" No city with this name found "));
     }
   };
 
