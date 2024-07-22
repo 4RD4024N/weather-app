@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import './App.css';
 import Weather from './components/weather';
 import CityInput from './components/CityInput';
 import { useSelector } from 'react-redux';
 
 const App = () => {
+  const [arama, setArama] = useState('');
   const { weather } = useSelector((state) => state.weather);
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [markerDetails, setMarkerDetails] = useState({});
   const [placesService, setPlacesService] = useState(null);
+  const searchInputRef = useRef(null);
 
   useEffect(() => {
     if (weather && weather.city) {
@@ -116,6 +118,7 @@ const App = () => {
     window.saveMarkerDetails = saveMarkerDetails;
   }, []);
 
+
   const removeMarker = (markerId) => {
     const markerToRemove = markers.find((m) => m.id === markerId);
     if (markerToRemove) {
@@ -135,15 +138,15 @@ const App = () => {
     setMarkerDetails({});
   };
 
-  const searchNearbyPlaces = (type) => {
+  const searchNearbyPlaces = (keyword) => {
     if (!placesService || !map) return;
-
+  
     const request = {
       location: map.getCenter(),
       radius: '5000',
-      type: [type],
+      keyword: keyword,
     };
-
+  
     placesService.nearbySearch(request, (results, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         results.forEach((place) => {
@@ -152,6 +155,7 @@ const App = () => {
       }
     });
   };
+  
 
   const addPlaceMarker = (place) => {
     const placeMarker = new window.google.maps.Marker({
@@ -170,15 +174,19 @@ const App = () => {
 
     setMarkers((prevMarkers) => [...prevMarkers, { id: place.place_id, marker: placeMarker, infoWindow: placeInfoWindow }]);
   };
+  const handleSearchButtonClick = () => {
+    const keyword = searchInputRef.current.value;
+    searchNearbyPlaces(keyword);
+  };
 
   return (
     <div className="App">
       <div className="weather-container">
-        <h1>Hava Durumu Uygulaması</h1>
+        <h1>Weather app by Arda Özan</h1>
         <CityInput />
+        <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' />
+        <button onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
         <Weather />
-        <button onClick={() => searchNearbyPlaces('hotel')}>Otelleri Göster</button>
-        <button onClick={() => searchNearbyPlaces('gas_station')}>Benzin İstasyonlarını Göster</button>
       </div>
       <div className="map-container">
         <div id="map"></div>
