@@ -184,8 +184,9 @@ const App = () => {
       <div className="weather-container">
         <h1>Weather app by Arda Özan</h1>
         <CityInput />
-        <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' />
-        <button onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
+        <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' className='infield'/>
+        <button className='but' onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
+        <a href='https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr' target='_blank'>          Click for supported keywords to search</a>
         <Weather />
       </div>
       <div className="map-container">
