@@ -11,6 +11,10 @@
   cursor: pointer;
   transition: transform 0.2s;
 }
+.share-button.night-mode{
+  color: white;
+  background-color: white;
+}
 
 .share-button:hover {
   transform: scale(1.1);
