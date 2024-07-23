@@ -18,17 +18,29 @@ const ShareButtons = () => {
 
   const shareOnFacebook = () => {
     const url = getShareUrl();
+    if (!url) {
+      alert('Lütfen bir şehir seçin.');
+      return;
+    }
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
   };
 
   const shareOnTwitter = () => {
     const url = getShareUrl();
+    if (!url) {
+      alert('Lütfen bir şehir seçin.');
+      return;
+    }
     const text = `Check out the weather in ${weather.city.name}! ${weather.list[0].weather[0].description}`;
     window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const shareOnWhatsApp = () => {
     const url = getShareUrl();
+    if (!url) {
+      alert('Lütfen bir şehir seçin.');
+      return;
+    }
     const text = `Check out the weather in ${weather.city.name}! ${weather.list[0].weather[0].description} - ${url}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };

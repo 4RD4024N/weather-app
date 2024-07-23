@@ -2,16 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import Weather from './components/weather';
 import CityInput from './components/CityInput';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleNightMode } from './themeSlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
-import './share.css'
+import { useSelector} from 'react-redux';
+import Navbar from './components/Navbar';
+import './share.css';
+import './Navbar.css'
+import ShareButtons from './components/ShareButtons';
+
 
 const App = () => {
   const { weather } = useSelector((state) => state.weather);
   const { isNightMode } = useSelector((state) => state.theme);
-  const dispatch = useDispatch();
+  
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [markerDetails, setMarkerDetails] = useState({});
@@ -210,24 +211,16 @@ const App = () => {
 
   return (
     <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
+      <Navbar/>
       <div className={`weather-container ${isNightMode ? 'night-mode' : ''}`}>
         <h1>Weather app by Arda Özan</h1>
-        <div className="share-buttons">
-            <button onClick={shareOnFacebook}>Share on Facebook</button>
-            <button onClick={shareOnTwitter}>Share on Twitter</button>
-            <button onClick={shareOnWhatsApp}>Share on WhatsApp</button>
-          </div>
-        <FontAwesomeIcon
-          icon={isNightMode ? faSun : faMoon}
-          className={`toggle-icon ${isNightMode ? 'night-mode' : ''}`}
-          onClick={() => dispatch(toggleNightMode())}
-          size="2x"
-        />
+        
         <CityInput isNightMode={isNightMode} />
         <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' className={`infield ${isNightMode ? 'night-mode' : ''}`} />
         <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
         <a className={isNightMode ? 'night-mode' : ''} href='https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr' target='_blank'> Click for supported keywords to search</a>
         <Weather isNightMode={isNightMode} />
+        <ShareButtons />
       </div>
       <div className="map-container">
         <div id="map"></div>
