@@ -46,7 +46,7 @@ const ShareButtons = () => {
   };
 
   return (
-    <div className="share-buttons">
+    <>
       <button className="share-button" onClick={shareOnFacebook}>
         <FontAwesomeIcon icon={faFacebook} size="2x" />
       </button>
@@ -56,7 +56,7 @@ const ShareButtons = () => {
       <button className="share-button" onClick={shareOnWhatsApp}>
         <FontAwesomeIcon icon={faWhatsapp} size="2x" />
       </button>
-    </div>
+    </>
   );
 };
 

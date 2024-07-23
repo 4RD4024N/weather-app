@@ -223,7 +223,7 @@ const App = () => {
 
   return (
     <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
-      <Navbar />
+      <Navbar/>
       <div className="container-fluid mt-3">
         <div className="row">
           <div className={`col-md-6 weather-container ${isNightMode ? 'night-mode' : ''}`}>

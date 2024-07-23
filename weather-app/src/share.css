@@ -1,13 +1,9 @@
-.share-buttons {
-  margin-top: 20px;
-  display: flex;
-  display: flex;
-  gap: 5px;
-}
+
 
 .share-button {
   padding: 10px;
   background-color: transparent;
+  float: right;
   border: none;
   cursor: pointer;
   transition: transform 0.2s;
