@@ -230,21 +230,21 @@ const App = () => {
             <h1>Weather app by Arda Özan</h1>
             <CityInput isNightMode={isNightMode} />
             <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' className={`infield ${isNightMode ? 'night-mode' : ''}`} />
-            <button className={`btn btn-primary ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
+            <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
             <a className={isNightMode ? 'night-mode' : ''} href='https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr' target='_blank'> Click for supported keywords to search</a>
             <Weather isNightMode={isNightMode} />
             
           </div>
           <div className="col-md-6 map-container">
             <div id="map"></div>
-            <button className={`btn btn-danger ${isNightMode ? 'night-mode' : ''}`} onClick={removeAllMarkers} style={{ position: 'absolute', top: 10, right: 10, zIndex: 1 }}>Tüm Markerları Kaldır</button>
+            <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={removeAllMarkers} style={{ position: 'absolute', top: 10, right: 10, zIndex: 1 }}>Tüm Markerları Kaldır</button>
           </div>
         </div>
       </div>
       {markers.map(({ id }) => (
         <div key={id}>
-          <button id={`save-${id}`} onClick={() => saveMarkerDetails(id)} style={{ display: 'none' }}>Kaydet</button>
-          <button id={`remove-${id}`} onClick={() => removeMarker(id)} style={{ display: 'none' }}>Markerı Kaldır</button>
+          <button className='but' id={`save-${id}`} onClick={() => saveMarkerDetails(id)} style={{ display: 'none' }}>Kaydet</button>
+          <button className='but' id={`remove-${id}`} onClick={() => removeMarker(id)} style={{ display: 'none' }}>Markerı Kaldır</button>
         </div>
       ))}
     </div>
