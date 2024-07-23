@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faCloudSun, faCloud, faCloudShowersHeavy, faCloudRain, faBolt, faSnowflake, faSmog } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import './weather.css';
+import '../weather.css'
 
 library.add(faSun, faCloudSun, faCloud, faCloudShowersHeavy, faCloudRain, faBolt, faSnowflake, faSmog);
 
-const Weather = () => {
+const Weather = ({ isNightMode }) => {
   const { weather, cityInfo } = useSelector((state) => state.weather);
   const [activeDay, setActiveDay] = useState(null);
 
@@ -67,13 +67,13 @@ const Weather = () => {
   const dailyWeather = weather ? groupWeatherByDays(weather.list) : {};
 
   return (
-    <div className="weather-container">
+    <div className={`weather-container ${isNightMode ? 'night-mode' : ''}`}>
       {weather && (
         <div id="weather">
           <h2>{weather.city.name}, {weather.city.country} Hava Durumu</h2>
           <div className="weather-accordion">
             {Object.keys(dailyWeather).map((day, index) => (
-              <div key={index} className="weather-day">
+              <div key={index} className={`weather-day ${isNightMode ? 'night-mode' : ''}`}>
                 <div className="weather-day-header" onClick={() => toggleDay(day)}>
                   <h3>{formatDate(day)}</h3>
                   <span>{activeDay === day ? '-' : '+'}</span>
@@ -111,7 +111,7 @@ const Weather = () => {
         </div>
       )}
       {cityInfo && (
-        <div className="city-info">
+        <div className={`city-info ${isNightMode ? 'night-mode' : ''}`}>
           <h3>{cityInfo.title}</h3>
           <p>{cityInfo.extract}</p>
           {cityInfo.thumbnail && (

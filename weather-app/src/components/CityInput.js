@@ -5,12 +5,13 @@ import { debounce } from 'lodash';
 import axios from 'axios';
 import '../CityInput.css';
 
-const CityInput = () => {
+
+const CityInput = ({ isNightMode }) => {
   const dispatch = useDispatch();
   const { city, suggestions, error } = useSelector((state) => state.weather);
 
   const getCitySuggestions = async (input) => {
-    const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_KEY; // Çevresel değişkeni doğrudan kullanın
+    const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_KEY;
     try {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/find`, {
@@ -36,7 +37,7 @@ const CityInput = () => {
       }
     } catch (error) {
       console.error("API request error:", error);
-      dispatch(setError(" No city with this name found "));
+      dispatch(setError("No city with this name found"));
     }
   };
 
@@ -77,16 +78,16 @@ const CityInput = () => {
   };
 
   return (
-    <div>
+    <div className={`city-input-container ${isNightMode ? 'night-mode' : ''}`}>
       <input
         type="text"
-        className="infield"
+        className={`infield ${isNightMode ? 'night-mode' : ''}`}
         value={city}
         onChange={handleCityInputChange}
         placeholder="Şehir adı giriniz"
       />
       {suggestions.length > 0 && (
-        <ul className="suggestions-list">
+        <ul className={`suggestions-list ${isNightMode ? 'night-mode' : ''}`}>
           {suggestions.map((suggestion, index) => (
             <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
               {suggestion.name}
@@ -94,9 +95,9 @@ const CityInput = () => {
           ))}
         </ul>
       )}
-      <button className="but" onClick={handleSearch}>Ara</button>
+      <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearch}>Ara</button>
       {error && (
-        <div className="error-container">
+        <div className={`error-container ${isNightMode ? 'night-mode' : ''}`}>
           <p className="error">{error}</p>
           <button onClick={handleCloseError}>Kapat</button>
         </div>

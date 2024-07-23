@@ -1,12 +1,17 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import Weather from './components/weather';
 import CityInput from './components/CityInput';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleNightMode } from './themeSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+
 
 const App = () => {
-  const [arama, setArama] = useState('');
   const { weather } = useSelector((state) => state.weather);
+  const { isNightMode } = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [markerDetails, setMarkerDetails] = useState({});
@@ -22,7 +27,7 @@ const App = () => {
   const loadMap = (lat, lon) => {
     if (!window.google) {
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places`; 
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places`;
       script.async = true;
       script.onload = () => initializeMap(lat, lon);
       document.head.appendChild(script);
@@ -43,7 +48,6 @@ const App = () => {
       const service = new window.google.maps.places.PlacesService(newMap);
       setPlacesService(service);
 
-      // Harita üzerine tıklanabilirlik ekleyin
       newMap.addListener('click', (event) => {
         addMarker(event.latLng, newMap);
       });
@@ -118,7 +122,6 @@ const App = () => {
     window.saveMarkerDetails = saveMarkerDetails;
   }, []);
 
-
   const removeMarker = (markerId) => {
     const markerToRemove = markers.find((m) => m.id === markerId);
     if (markerToRemove) {
@@ -140,13 +143,13 @@ const App = () => {
 
   const searchNearbyPlaces = (keyword) => {
     if (!placesService || !map) return;
-  
+
     const request = {
       location: map.getCenter(),
       radius: '5000',
       keyword: keyword,
     };
-  
+
     placesService.nearbySearch(request, (results, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         results.forEach((place) => {
@@ -155,7 +158,6 @@ const App = () => {
       }
     });
   };
-  
 
   const addPlaceMarker = (place) => {
     const placeMarker = new window.google.maps.Marker({
@@ -174,24 +176,31 @@ const App = () => {
 
     setMarkers((prevMarkers) => [...prevMarkers, { id: place.place_id, marker: placeMarker, infoWindow: placeInfoWindow }]);
   };
+
   const handleSearchButtonClick = () => {
     const keyword = searchInputRef.current.value;
     searchNearbyPlaces(keyword);
   };
 
   return (
-    <div className="App">
-      <div className="weather-container">
+    <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
+      <div className={`weather-container ${isNightMode ? 'night-mode' : ''}`}>
         <h1>Weather app by Arda Özan</h1>
-        <CityInput />
-        <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' className='infield'/>
-        <button className='but' onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
-        <a href='https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr' target='_blank'>          Click for supported keywords to search</a>
-        <Weather />
+        <FontAwesomeIcon
+          icon={isNightMode ? faSun : faMoon}
+          className={`toggle-icon ${isNightMode ? 'night-mode' : ''}`}
+          onClick={() => dispatch(toggleNightMode())}
+          size="2x"
+        />
+        <CityInput isNightMode={isNightMode} />
+        <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' className={`infield ${isNightMode ? 'night-mode' : ''}`} />
+        <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
+        <a className={isNightMode ? 'night-mode' : ''} href='https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr' target='_blank'> Click for supported keywords to search</a>
+        <Weather isNightMode={isNightMode} />
       </div>
       <div className="map-container">
         <div id="map"></div>
-        <button onClick={removeAllMarkers} style={{ position: 'absolute', top: 10, right: 10, zIndex: 1 }}>Tüm Markerları Kaldır</button>
+        <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={removeAllMarkers} style={{ position: 'absolute', top: 10, right: 10, zIndex: 1 }}>Tüm Markerları Kaldır</button>
       </div>
       {markers.map(({ id }) => (
         <div key={id}>
