@@ -1,13 +1,15 @@
-// src/App.js
-
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import Weather from './components/weather';
 import CityInput from './components/CityInput';
 import { useSelector } from 'react-redux';
 import Navbar from './components/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './share.css';
-import ShareButtons from './components/ShareButtons';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import './Navbar.css';
+import './CityInput.css'
 
 const App = () => {
   const { weather } = useSelector((state) => state.weather);
@@ -223,28 +225,29 @@ const App = () => {
 
   return (
     <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
-      <Navbar/>
-      <div className="container-fluid mt-3">
-        <div className="row">
-          <div className={`col-md-6 weather-container ${isNightMode ? 'night-mode' : ''}`}>
+      <Navbar />
+      <Container fluid className="mt-3">
+        <Row>
+          <Col md={6} className={`weather-container ${isNightMode ? 'night-mode' : ''}`}>
             <h1>Weather app by Arda Özan</h1>
             <CityInput isNightMode={isNightMode} />
-            <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' className={`infield ${isNightMode ? 'night-mode' : ''}`} />
-            <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
-            <a className={isNightMode ? 'night-mode' : ''} href='https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr' target='_blank'> Click for supported keywords to search</a>
+            <div className={`city-input-container ${isNightMode ? 'night-mode': ''}`}>
+              <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' className={`infield ${isNightMode ? 'night-mode' : ''}`} />
+              <Button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</Button>
+              <a className={isNightMode ? 'night-mode' : ''} href='https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr' target='_blank'> Click for supported keywords to search</a>
+            </div>
             <Weather isNightMode={isNightMode} />
-            
-          </div>
-          <div className="col-md-6 map-container">
-            <div id="map"></div>
-            <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={removeAllMarkers} style={{ position: 'absolute', top: 10, right: 10, zIndex: 1 }}>Tüm Markerları Kaldır</button>
-          </div>
-        </div>
-      </div>
+          </Col>
+          <Col md={6} className="map-container">
+            <div id="map" style={{ width: '100%', height: '600px' }}></div>
+            <Button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={removeAllMarkers} style={{ position: 'absolute', top: 10, right: 10, zIndex: 1 }}>Tüm Markerları Kaldır</Button>
+          </Col>
+        </Row>
+      </Container>
       {markers.map(({ id }) => (
         <div key={id}>
-          <button className='but' id={`save-${id}`} onClick={() => saveMarkerDetails(id)} style={{ display: 'none' }}>Kaydet</button>
-          <button className='but' id={`remove-${id}`} onClick={() => removeMarker(id)} style={{ display: 'none' }}>Markerı Kaldır</button>
+          <Button className='but' id={`save-${id}`} onClick={() => saveMarkerDetails(id)} style={{ display: 'none' }}>Kaydet</Button>
+          <Button className='but' id={`remove-${id}`} onClick={() => removeMarker(id)} style={{ display: 'none' }}>Markerı Kaldır</Button>
         </div>
       ))}
     </div>

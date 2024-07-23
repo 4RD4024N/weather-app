@@ -5,7 +5,6 @@ import { debounce } from 'lodash';
 import axios from 'axios';
 import '../CityInput.css';
 
-
 const CityInput = ({ isNightMode }) => {
   const dispatch = useDispatch();
   const { city, suggestions, error } = useSelector((state) => state.weather);

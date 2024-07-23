@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faCloudSun, faCloud, faCloudShowersHeavy, faCloudRain, faBolt, faSnowflake, faSmog } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import '../weather.css'
+import '../weather.css';
 
 library.add(faSun, faCloudSun, faCloud, faCloudShowersHeavy, faCloudRain, faBolt, faSnowflake, faSmog);
 
@@ -74,27 +74,27 @@ const Weather = ({ isNightMode }) => {
           <div className="weather-accordion">
             {Object.keys(dailyWeather).map((day, index) => (
               <div key={index} className={`weather-day ${isNightMode ? 'night-mode' : ''}`}>
-                <div className="weather-day-header" onClick={() => toggleDay(day)}>
+                <div className={`weather-day-header ${isNightMode ? 'night-mode' : ''}`} onClick={() => toggleDay(day)}>
                   <h3>{formatDate(day)}</h3>
                   <span>{activeDay === day ? '-' : '+'}</span>
                 </div>
-                <div className={`weather-day-details ${activeDay === day ? 'open' : ''}`}>
-                  <table className="weather-table">
+                <div className={`weather-day-details ${activeDay === day ? 'open' : ''} ${isNightMode ? 'night-mode' : ''}`}>
+                  <table className={`weather-table ${isNightMode ? 'night-mode' : ''}`}>
                     <thead>
                       <tr>
-                        <th>Saat</th>
-                        <th>Sıcaklık (°C)</th>
-                        <th>Hava Durumu</th>
-                        <th>Simge</th>
+                        <th className={isNightMode ? 'night-mode' : ''}>Saat</th>
+                        <th className={isNightMode ? 'night-mode' : ''}>Sıcaklık (°C)</th>
+                        <th className={isNightMode ? 'night-mode' : ''}>Hava Durumu</th>
+                        <th className={isNightMode ? 'night-mode' : ''}>Simge</th>
                       </tr>
                     </thead>
                     <tbody>
                       {dailyWeather[day].map((forecast, index) => (
                         <tr key={index}>
-                          <td>{forecast.dt_txt.split(' ')[1]}</td>
-                          <td>{forecast.main.temp}°C</td>
-                          <td>{forecast.weather[0].description}</td>
-                          <td>
+                          <td className={isNightMode ? 'night-mode' : ''}>{forecast.dt_txt.split(' ')[1]}</td>
+                          <td className={isNightMode ? 'night-mode' : ''}>{forecast.main.temp}°C</td>
+                          <td className={isNightMode ? 'night-mode' : ''}>{forecast.weather[0].description}</td>
+                          <td className={isNightMode ? 'night-mode' : ''}>
                             <FontAwesomeIcon
                               icon={getWeatherIcon(forecast.weather[0].icon)}
                               className="weather-icon"

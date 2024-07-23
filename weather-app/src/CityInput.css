@@ -3,9 +3,11 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
 }
 .city-input-container.night-mode {
   background-color: #121212;
+  color: white; /* Gece modu için yazı rengi beyaz */
 }
 
 .infield {
@@ -15,9 +17,10 @@
   border: 1px solid #ccc;
   font-size: 16px;
   outline: none;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
   margin-bottom: 10px;
 }
+
 .infield.night-mode {
   background-color: #333;
   color: white;
@@ -34,7 +37,9 @@
   max-height: 150px;
   overflow-y: auto;
   margin-top: 10px;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
 }
+
 .suggestions-list.night-mode {
   border-color: #555;
   background-color: #333;
@@ -44,10 +49,13 @@
 .suggestions-list li {
   padding: 10px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
+
 .suggestions-list li:hover {
   background-color: #f1f1f1;
 }
+
 .suggestions-list.night-mode li:hover {
   background-color: #555;
 }
@@ -58,7 +66,9 @@
   background-color: #fdd;
   padding: 10px;
   border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
 }
+
 .error-container.night-mode {
   background-color: #333;
   color: white;
@@ -73,8 +83,9 @@
   border-radius: 15px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 .but.night-mode {
   background-color: #333;
   color: white;
@@ -83,6 +94,7 @@
 .but:hover {
   background-color: rgb(10, 90, 210);
 }
+
 .but.night-mode:hover {
   background-color: #555;
 }
@@ -90,6 +102,7 @@
 .but:active {
   background-color: rgb(8, 72, 168);
 }
+
 .but.night-mode:active {
   background-color: #222;
 }

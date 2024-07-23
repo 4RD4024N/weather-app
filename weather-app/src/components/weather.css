@@ -1,0 +1,136 @@
+.weather-container {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .weather-container.night-mode {
+    background-color: #121212;
+    color: white;
+  }
+  
+  .weather-accordion {
+    margin-top: 20px;
+  }
+  
+  .weather-day {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .weather-day.night-mode {
+    border-color: #555;
+  }
+  
+  .weather-day-header {
+    background-color: #f1f1f1;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+  }
+  
+  .weather-day-header:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .weather-day-header.night-mode {
+    background-color: #333;
+    color: black; /* Gece modunda yazı rengini siyah yap */
+  }
+  
+  .weather-day-header.night-mode:hover {
+    background-color: #444;
+  }
+  
+  .weather-day-details {
+    display: none;
+    padding: 10px;
+    background-color: white;
+    border-top: 1px solid #ddd;
+  }
+  
+  .weather-day-details.open {
+    display: block;
+  }
+  
+  .weather-day-details.night-mode {
+    background-color: #121212;
+    border-color: #555;
+  }
+  
+  .weather-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .weather-table th,
+  .weather-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .weather-table th {
+    background-color: #f9f9f9;
+  }
+  
+  .weather-table td {
+    background-color: #fff;
+  }
+  
+  .weather-table.night-mode th {
+    background-color: #333;
+  }
+  
+  .weather-table.night-mode td {
+    background-color: #222;
+  }
+  
+  .weather-icon {
+    font-size: 1.5em;
+  }
+  
+  .city-info {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .city-info.night-mode {
+    background-color: #121212;
+    border-color: #555;
+    color: white;
+  }
+  
+  .city-info img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .city-info a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .city-info.night-mode a {
+    color: #bb86fc;
+  }
+  
+  .city-info a:hover {
+    text-decoration: underline;
+  }
+  
