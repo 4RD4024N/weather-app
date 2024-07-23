@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleNightMode } from './themeSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
-
+import './share.css'
 
 const App = () => {
   const { weather } = useSelector((state) => state.weather);
@@ -23,6 +23,32 @@ const App = () => {
       loadMap(weather.city.coord.lat, weather.city.coord.lon);
     }
   }, [weather]);
+  const getShareUrl = () => {
+    if (weather) {
+      const city = weather.city.name;
+      const description = weather.list[0].weather[0].description;
+      return `https://weather-app.example.com/?city=${city}&description=${description}`;
+    }
+    return '';
+  };
+
+  const shareOnFacebook = () => {
+    const url = getShareUrl();
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+  };
+
+  const shareOnTwitter = () => {
+    const url = getShareUrl();
+    const text = `Check out the weather in ${weather.city.name}! ${weather.list[0].weather[0].description}`;
+    window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const shareOnWhatsApp = () => {
+    const url = getShareUrl();
+    const text = `Check out the weather in ${weather.city.name}! ${weather.list[0].weather[0].description} - ${url}`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
 
   const loadMap = (lat, lon) => {
     if (!window.google) {
@@ -186,6 +212,11 @@ const App = () => {
     <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
       <div className={`weather-container ${isNightMode ? 'night-mode' : ''}`}>
         <h1>Weather app by Arda Özan</h1>
+        <div className="share-buttons">
+            <button onClick={shareOnFacebook}>Share on Facebook</button>
+            <button onClick={shareOnTwitter}>Share on Twitter</button>
+            <button onClick={shareOnWhatsApp}>Share on WhatsApp</button>
+          </div>
         <FontAwesomeIcon
           icon={isNightMode ? faSun : faMoon}
           className={`toggle-icon ${isNightMode ? 'night-mode' : ''}`}
