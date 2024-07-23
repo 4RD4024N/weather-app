@@ -1,18 +1,18 @@
+// src/App.js
+
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import Weather from './components/weather';
 import CityInput from './components/CityInput';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import Navbar from './components/Navbar';
 import './share.css';
-import './Navbar.css'
 import ShareButtons from './components/ShareButtons';
-
 
 const App = () => {
   const { weather } = useSelector((state) => state.weather);
   const { isNightMode } = useSelector((state) => state.theme);
-  
+
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [markerDetails, setMarkerDetails] = useState({});
@@ -24,6 +24,7 @@ const App = () => {
       loadMap(weather.city.coord.lat, weather.city.coord.lon);
     }
   }, [weather]);
+
   const getShareUrl = () => {
     if (weather) {
       const city = weather.city.name;
@@ -35,21 +36,32 @@ const App = () => {
 
   const shareOnFacebook = () => {
     const url = getShareUrl();
+    if (!url) {
+      alert('Lütfen bir şehir seçin.');
+      return;
+    }
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
   };
 
   const shareOnTwitter = () => {
     const url = getShareUrl();
+    if (!url) {
+      alert('Lütfen bir şehir seçin.');
+      return;
+    }
     const text = `Check out the weather in ${weather.city.name}! ${weather.list[0].weather[0].description}`;
     window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const shareOnWhatsApp = () => {
     const url = getShareUrl();
+    if (!url) {
+      alert('Lütfen bir şehir seçin.');
+      return;
+    }
     const text = `Check out the weather in ${weather.city.name}! ${weather.list[0].weather[0].description} - ${url}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
-
 
   const loadMap = (lat, lon) => {
     if (!window.google) {
@@ -211,20 +223,23 @@ const App = () => {
 
   return (
     <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
-      <Navbar/>
-      <div className={`weather-container ${isNightMode ? 'night-mode' : ''}`}>
-        <h1>Weather app by Arda Özan</h1>
-        
-        <CityInput isNightMode={isNightMode} />
-        <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' className={`infield ${isNightMode ? 'night-mode' : ''}`} />
-        <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
-        <a className={isNightMode ? 'night-mode' : ''} href='https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr' target='_blank'> Click for supported keywords to search</a>
-        <Weather isNightMode={isNightMode} />
-        <ShareButtons />
-      </div>
-      <div className="map-container">
-        <div id="map"></div>
-        <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={removeAllMarkers} style={{ position: 'absolute', top: 10, right: 10, zIndex: 1 }}>Tüm Markerları Kaldır</button>
+      <Navbar />
+      <div className="container-fluid mt-3">
+        <div className="row">
+          <div className={`col-md-6 weather-container ${isNightMode ? 'night-mode' : ''}`}>
+            <h1>Weather app by Arda Özan</h1>
+            <CityInput isNightMode={isNightMode} />
+            <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' className={`infield ${isNightMode ? 'night-mode' : ''}`} />
+            <button className={`btn btn-primary ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</button>
+            <a className={isNightMode ? 'night-mode' : ''} href='https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr' target='_blank'> Click for supported keywords to search</a>
+            <Weather isNightMode={isNightMode} />
+            
+          </div>
+          <div className="col-md-6 map-container">
+            <div id="map"></div>
+            <button className={`btn btn-danger ${isNightMode ? 'night-mode' : ''}`} onClick={removeAllMarkers} style={{ position: 'absolute', top: 10, right: 10, zIndex: 1 }}>Tüm Markerları Kaldır</button>
+          </div>
+        </div>
       </div>
       {markers.map(({ id }) => (
         <div key={id}>

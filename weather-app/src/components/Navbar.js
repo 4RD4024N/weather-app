@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { toggleNightMode } from '../themeSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import ShareButtons from './ShareButtons';
 
 const Navbar=()=>{
     const { isNightMode } = useSelector((state) => state.theme);
@@ -16,6 +17,7 @@ const Navbar=()=>{
           onClick={() => dispatch(toggleNightMode())}
           size="3x"
         />
+        <ShareButtons/>
         </div>
 
         </>

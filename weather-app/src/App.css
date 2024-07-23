@@ -1,55 +1,28 @@
 .App {
-  display: flex;
   height: 100vh;
   font-family: Arial, sans-serif;
   background-color: white;
   color: black;
   transition: background-color 0.5s, color 0.5s;
 }
+
 .App.night-mode {
   background-color: #121212;
   color: white;
 }
 
-header {
-  padding: 20px;
-  text-align: center;
-}
-
-header button {
-  padding: 10px 20px;
-  background-color: #007BFF;
-  border: none;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-header button.night-mode {
-  background-color: #333;
-}
-
-header button:hover {
-  background-color: #0056b3;
-}
-header button.night-mode:hover {
-  background-color: #555;
-}
-
 .weather-container {
-  width: 70%;
   padding: 10px;
-  overflow-y: auto;
-  border-right: 1px solid #ddd;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   background-color: #f9f9f9;
 }
+
 .weather-container.night-mode {
   background-color: #121212;
 }
 
 .infield {
-  width: calc(100% - 40px);
+  width: 100%;
   border-radius: 20px;
   padding: 15px 20px;
   border: 1px solid #ccc;
@@ -58,6 +31,7 @@ header button.night-mode:hover {
   transition: border-color 0.3s;
   margin-bottom: 10px;
 }
+
 .infield.night-mode {
   background-color: #333;
   color: white;
@@ -68,175 +42,50 @@ header button.night-mode:hover {
   border-color: #7d9fe1;
   box-shadow: 0 0 5px rgba(125, 159, 225, 0.5);
 }
+
 .infield.night-mode:focus {
   border-color: #9d9fe1;
   box-shadow: 0 0 5px rgba(157, 159, 225, 0.5);
 }
 
-.but {
-  background-color: rgb(12, 108, 251);
-  color: #fff;
+.btn {
   margin: 10px 0;
   padding: 12px 20px;
-  border: none;
-  border-radius: 15px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.but.night-mode {
+
+.btn.night-mode {
   background-color: #333;
   color: white;
 }
 
-.but:hover {
+.btn:hover {
   background-color: rgb(10, 90, 210);
 }
-.but.night-mode:hover {
+
+.btn.night-mode:hover {
   background-color: #555;
 }
 
-.but:active {
+.btn:active {
   background-color: rgb(8, 72, 168);
 }
-.but.night-mode:active {
+
+.btn.night-mode:active {
   background-color: #222;
 }
 
 .map-container {
-  width: 70%;
+  width: 100%;
+  height: 600px;
   position: relative;
 }
 
 #map {
   width: 100%;
   height: 100%;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-}
-.weather-accordion {
-  display: flex;
-  flex-direction: column;
-}
-
-.weather-day {
-  border: 1px solid #ddd;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  overflow: hidden;
-}
-.weather-day.night-mode {
-  border-color: #555;
-  background-color: #333;
-}
-
-.weather-day-header {
-  padding: 10px;
-  background-color: #e1e1e1;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.weather-day-header.night-mode {
-  background-color: #555;
-}
-
-.weather-day-header h3 {
-  margin: 0;
-  font-size: 16px;
-}
-.weather-day-header.night-mode h3 {
-  color: white;
-}
-
-.weather-day-details {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.75s ease;
-}
-
-.weather-day-details.open {
-  max-height: 1000px;
-}
-
-.weather-table {
-  width: 100%;
-  border-collapse: collapse;
-  color: black;
-}
-.weather-table.night-mode {
-  color: white;
-}
-
-.weather-table th, .weather-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-.weather-table th.night-mode, .weather-table td.night-mode {
-  border-color: #555;
-}
-
-.weather-table th {
-  background-color: #f1f1f1;
-}
-.weather-table th.night-mode {
-  background-color: #555;
-}
-
-.weather-table td {
-  background-color: #fff;
-}
-.weather-table td.night-mode {
-  background-color: #444;
-}
-
-.weather-icon {
-  font-size: 24px;
-}
-
-.suggestions-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  max-height: 150px;
-  overflow-y: auto;
-  margin-top: 10px;
-}
-.suggestions-list.night-mode {
-  border-color: #555;
-  background-color: #333;
-  color: white;
-}
-
-.suggestions-list li {
-  padding: 10px;
-  cursor: pointer;
-}
-.suggestions-list li:hover {
-  background-color: #f1f1f1;
-}
-.suggestions-list.night-mode li:hover {
-  background-color: #555;
-}
-
-.error-container {
-  margin-top: 20px;
-  color: red;
-  background-color: #fdd;
-  padding: 10px;
-  border-radius: 5px;
-}
-.error-container.night-mode {
-  background-color: #333;
-  color: white;
 }
 
 .city-info {
@@ -247,6 +96,7 @@ header button.night-mode:hover {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 .city-info.night-mode {
   background-color: #333;
   border-color: #555;
@@ -261,6 +111,7 @@ header button.night-mode:hover {
 a {
   color: #007BFF;
 }
+
 a.night-mode {
   color: #BB86FC;
 }
@@ -268,9 +119,8 @@ a.night-mode {
 .toggle-icon {
   cursor: pointer;
   transition: color 0.3s;
-  margin-bottom: 20px; /* Gerekirse hizalamak için ekleyebilirsiniz */
-}
-.toggle-icon.night-mode {
-  color: #f1c40f; /* Güneş rengi */
 }
 
+.toggle-icon.night-mode {
+  color: #f1c40f;
+}
