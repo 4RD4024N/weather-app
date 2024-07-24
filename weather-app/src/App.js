@@ -27,44 +27,7 @@ const App = () => {
     }
   }, [weather]);
 
-  const getShareUrl = () => {
-    if (weather) {
-      const city = weather.city.name;
-      const description = weather.list[0].weather[0].description;
-      return `https://weather-app.example.com/?city=${city}&description=${description}`;
-    }
-    return '';
-  };
-
-  const shareOnFacebook = () => {
-    const url = getShareUrl();
-    if (!url) {
-      alert('Lütfen bir şehir seçin.');
-      return;
-    }
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
-  };
-
-  const shareOnTwitter = () => {
-    const url = getShareUrl();
-    if (!url) {
-      alert('Lütfen bir şehir seçin.');
-      return;
-    }
-    const text = `Check out the weather in ${weather.city.name}! ${weather.list[0].weather[0].description}`;
-    window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
-  };
-
-  const shareOnWhatsApp = () => {
-    const url = getShareUrl();
-    if (!url) {
-      alert('Lütfen bir şehir seçin.');
-      return;
-    }
-    const text = `Check out the weather in ${weather.city.name}! ${weather.list[0].weather[0].description} - ${url}`;
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
-  };
-
+ 
   const loadMap = (lat, lon) => {
     if (!window.google) {
       const script = document.createElement('script');
@@ -224,19 +187,23 @@ const App = () => {
   };
 
   return (
+    <>
+    
     <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
-      <Navbar />
+      <div className={`navbar ${isNightMode ? 'night-mode ': ''}`}>
+    <Navbar />
+      </div>
       <Container fluid className="mt-3">
         <Row>
           <Col md={6} className={`weather-container ${isNightMode ? 'night-mode' : ''}`}>
             <h1>Weather app by Arda Özan</h1>
-            <CityInput isNightMode={isNightMode} />
+            <CityInput/>
             <div className={`city-input-container ${isNightMode ? 'night-mode': ''}`}>
               <input ref={searchInputRef} type='text' placeholder='Nereye gitmek istersiniz?' className={`infield ${isNightMode ? 'night-mode' : ''}`} />
               <Button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</Button>
               <a className={isNightMode ? 'night-mode' : ''} href='https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr' target='_blank'> Click for supported keywords to search</a>
             </div>
-            <Weather isNightMode={isNightMode} />
+            <Weather />
           </Col>
           <Col md={6} className="map-container">
             <div id="map" style={{ width: '100%', height: '600px' }}></div>
@@ -251,6 +218,7 @@ const App = () => {
         </div>
       ))}
     </div>
+    </>
   );
 };
 

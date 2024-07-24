@@ -3,14 +3,18 @@
 .share-button {
   padding: 10px;
   background-color: transparent;
+  justify-content: right;
+  justify-items: right;
   float: right;
+  color: rgb(255, 255, 255);
   border: none;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.5s;
 }
 .share-button.night-mode{
-  color: white;
-  background-color: white;
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  transition: transform 0.5s;
 }
 
 .share-button:hover {

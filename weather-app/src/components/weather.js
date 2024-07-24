@@ -7,9 +7,10 @@ import '../weather.css';
 
 library.add(faSun, faCloudSun, faCloud, faCloudShowersHeavy, faCloudRain, faBolt, faSnowflake, faSmog);
 
-const Weather = ({ isNightMode }) => {
+const Weather = () => {
   const { weather, cityInfo } = useSelector((state) => state.weather);
   const [activeDay, setActiveDay] = useState(null);
+  const { isNightMode } = useSelector((state) => state.theme);
 
   const getWeatherIcon = (iconCode) => {
     switch (iconCode) {

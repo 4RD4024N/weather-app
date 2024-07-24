@@ -5,9 +5,10 @@ import { debounce } from 'lodash';
 import axios from 'axios';
 import '../CityInput.css';
 
-const CityInput = ({ isNightMode }) => {
+const CityInput = () => {
   const dispatch = useDispatch();
   const { city, suggestions, error } = useSelector((state) => state.weather);
+  const { isNightMode } = useSelector((state) => state.theme);
 
   const getCitySuggestions = async (input) => {
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_KEY;

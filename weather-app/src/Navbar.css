@@ -1,21 +1,37 @@
 .navbar {
-   background-color: black;
-   justify-content: center;
-   color: white; /* Değiştirildi */
+   background-color: rgb(124, 124, 124);
+   color: white; 
    position: sticky;
    top: 0;
    width: 100%;
-   display: flex;
-   padding: 10px 0;
+   padding: 10px 20px; /* Added padding for spacing */
    z-index: 1000;
- }
- 
- .icon-container {
+   display: flex;
+   justify-content: space-between; /* Ensures the moon icon is on the left and the share buttons are on the right */
+   align-items: center;
+}
+
+.navbar.night-mode {
+   background-color: rgb(35, 34, 34);
+}
+
+.icon-group {
    display: flex;
    align-items: center;
- }
- 
- .night-mode .toggle-icon {
+   gap: 20px; /* Adjust gap as needed */
+}
+
+.toggle-icon {
+   color: white;
+   padding-left: 15px;
+   cursor: pointer;
+}
+
+.night-mode .toggle-icon {
    color: yellow;
- }
- 
+}
+
+.share-buttons {
+   display: flex;
+   gap: 10px; /* Adjusts spacing between share buttons */
+}

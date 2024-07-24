@@ -1,13 +1,14 @@
 .city-input-container {
   padding: 20px;
-  background-color: white;
+  background-color: hsl(0, 0%, 100%);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  transition: background-color 0.5s, color 0.5s;
 }
 .city-input-container.night-mode {
   background-color: #121212;
-  color: white; /* Gece modu için yazı rengi beyaz */
+  color: white; 
 }
 
 .infield {
@@ -17,7 +18,7 @@
   border: 1px solid #ccc;
   font-size: 16px;
   outline: none;
-  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+  transition: border-color 0.5s, background-color 0.5s, color 0.5s;
   margin-bottom: 10px;
 }
 
@@ -37,7 +38,7 @@
   max-height: 150px;
   overflow-y: auto;
   margin-top: 10px;
-  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+  transition: border-color 0.5s, background-color 0.5s, color 0.5s;
 }
 
 .suggestions-list.night-mode {
@@ -49,7 +50,7 @@
 .suggestions-list li {
   padding: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.5s;
 }
 
 .suggestions-list li:hover {
@@ -66,7 +67,7 @@
   background-color: #fdd;
   padding: 10px;
   border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .error-container.night-mode {
@@ -83,7 +84,7 @@
   border-radius: 15px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .but.night-mode {

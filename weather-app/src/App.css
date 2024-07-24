@@ -23,11 +23,11 @@ html, body {
   border-radius: 15px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.5s ease;
 }
 
 .App.night-mode {
-  background-color: #121212;
+  background-color: #3d3d3d;
   color: white;
 }
 
@@ -48,7 +48,7 @@ html, body {
   border: 1px solid #ccc;
   font-size: 16px;
   outline: none;
-  transition: border-color 0.3s;
+  transition: border-color 0.5s;
   margin-bottom: 10px;
 }
 
@@ -73,7 +73,7 @@ html, body {
   padding: 12px 20px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.5s ease;
 }
 
 .btn.night-mode {
@@ -139,7 +139,7 @@ a.night-mode {
 
 .toggle-icon {
   cursor: pointer;
-  transition: color 0.3s;
+  transition: color 0.5s;
 }
 
 .toggle-icon.night-mode {
@@ -149,7 +149,7 @@ a.night-mode {
 .weather-day-detail {
   color: black;
   background-color: black;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.5s, color 0.s;
 }
 
 .weather-day-detail.night-mode {

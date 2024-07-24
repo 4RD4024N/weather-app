@@ -6,6 +6,7 @@ import '../share.css';
 
 const ShareButtons = () => {
   const { weather } = useSelector((state) => state.weather);
+  const isNightMode = useSelector((state) => state.theme.isNightMode);
 
   const getShareUrl = () => {
     if (weather) {
@@ -45,15 +46,17 @@ const ShareButtons = () => {
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 
+  const buttonClassName = isNightMode ? 'share-button night-mode' : 'share-button';
+
   return (
     <>
-      <button className="share-button" onClick={shareOnFacebook}>
+      <button className={buttonClassName} onClick={shareOnFacebook}>
         <FontAwesomeIcon icon={faFacebook} size="2x" />
       </button>
-      <button className="share-button" onClick={shareOnTwitter}>
+      <button className={buttonClassName} onClick={shareOnTwitter}>
         <FontAwesomeIcon icon={faTwitter} size="2x" />
       </button>
-      <button className="share-button" onClick={shareOnWhatsApp}>
+      <button className={buttonClassName} onClick={shareOnWhatsApp}>
         <FontAwesomeIcon icon={faWhatsapp} size="2x" />
       </button>
     </>

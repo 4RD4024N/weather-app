@@ -4,7 +4,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .weather-container.night-mode {
@@ -17,7 +17,7 @@
   margin-bottom: 5px;
   border-radius: 5px;
   overflow: hidden;
-  transition: border-color 0.3s, background-color 0.3s;
+  transition: border-color 0.5s, background-color 0.5s;
 }
 
 .weather-day.night-mode {
@@ -32,7 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .weather-day-header.night-mode {
@@ -52,7 +52,7 @@
 .weather-day-details {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.75s ease;
+  transition: max-height 0.5s ease;
 }
 
 .weather-day-details.open {
@@ -73,7 +73,7 @@
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
-  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+  transition: border-color 0.5s, background-color 0.5s, color 0.5s;
 }
 
 .weather-table th.night-mode, .weather-table td.night-mode {
@@ -107,7 +107,7 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  transition: background-color 0.5s, border-color 0.5s, color 0.5s;
 }
 
 .city-info.night-mode {
@@ -123,7 +123,7 @@
 
 a {
   color: #007BFF;
-  transition: color 0.3s;
+  transition: color 0.5s;
 }
 
 a.night-mode {

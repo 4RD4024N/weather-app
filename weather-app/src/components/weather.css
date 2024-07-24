@@ -4,7 +4,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.5s, color 0.5s;
   }
   
   .weather-container.night-mode {
@@ -34,7 +34,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.3s;
+    transition: background-color 0.5s;
   }
   
   .weather-day-header:hover {
@@ -105,7 +105,7 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.5s, color 0.5s;
   }
   
   .city-info.night-mode {
@@ -123,7 +123,7 @@
   .city-info a {
     color: #007bff;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.5s;
   }
   
   .city-info.night-mode a {
