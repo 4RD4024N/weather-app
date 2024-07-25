@@ -1,14 +1,19 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCity, setSuggestions, clearError, fetchWeather, fetchCityInfo, setError } from '../weatherSlice';
+import { fetchNearbyPlaces, clearSearchResults } from '../searchSlice';
 import { debounce } from 'lodash';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 import '../CityInput.css';
 
 const CityInput = () => {
   const dispatch = useDispatch();
   const { city, suggestions, error } = useSelector((state) => state.weather);
   const { isNightMode } = useSelector((state) => state.theme);
+  const { map } = useSelector((state) => state.map);
+  const [searchInput, setSearchInput] = useState('');
+  const searchInputRef = useRef(null);
 
   const getCitySuggestions = async (input) => {
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_KEY;
@@ -71,6 +76,14 @@ const CityInput = () => {
     }
   };
 
+  const handleSearchButtonClick = () => {
+    if (searchInput.trim() && map) {
+      dispatch(fetchNearbyPlaces(searchInput));
+    } else {
+      dispatch(setError('Lütfen aramak istediğiniz yeri giriniz ve haritanın yüklendiğinden emin olun.'));
+    }
+  };
+
   const handleCloseError = () => {
     dispatch(clearError());
     dispatch(setCity(''));
@@ -96,6 +109,16 @@ const CityInput = () => {
         </ul>
       )}
       <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearch}>Ara</button>
+      <input
+        type='text'
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        placeholder='Nereyi bulmak istersiniz?'
+        className={`infield ${isNightMode ? 'night-mode' : ''}`}
+        ref={searchInputRef}
+      />
+      <Button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</Button>
+      <a className={isNightMode ? 'night-mode' : ''} href="https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr" target="_blank" rel="noopener noreferrer"> Click for supported keywords to search</a>
       {error && (
         <div className={`error-container ${isNightMode ? 'night-mode' : ''}`}>
           <p className="error">{error}</p>

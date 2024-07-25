@@ -117,6 +117,75 @@ html, body {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+/* App.css */
+/* App.css */
+/* App.css */
+.info-window {
+  font-size: 14px;
+  color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.info-window.night-mode {
+  background-color: #444;
+  color: #ddd;
+}
+
+.info-window .title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.info-window .description {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.info-window input,
+.info-window textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.info-window input.night-mode,
+.info-window textarea.night-mode {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
+}
+
+.info-window button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.info-window button:hover {
+  background-color: #0056b3;
+}
+
+.info-window.night-mode button {
+  background-color: #555;
+}
+
+.info-window.night-mode button:hover {
+  background-color: #333;
+}
+
 
 .city-info.night-mode {
   background-color: #333;

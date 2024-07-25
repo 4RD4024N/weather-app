@@ -1,25 +1,18 @@
 .city-input-container {
-  padding: 20px;
-  background-color: hsl(0, 0%, 100%);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  transition: background-color 0.5s, color 0.5s;
-}
-.city-input-container.night-mode {
-  background-color: #121212;
-  color: white; 
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 
 .infield {
-  width: calc(100% - 40px);
+  width: 100%;
   border-radius: 20px;
   padding: 15px 20px;
   border: 1px solid #ccc;
   font-size: 16px;
   outline: none;
-  transition: border-color 0.5s, background-color 0.5s, color 0.5s;
-  margin-bottom: 10px;
+  transition: border-color 0.5s;
 }
 
 .infield.night-mode {
@@ -28,51 +21,14 @@
   border-color: #555;
 }
 
-.suggestions-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  max-height: 150px;
-  overflow-y: auto;
-  margin-top: 10px;
-  transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+.infield:focus {
+  border-color: #7d9fe1;
+  box-shadow: 0 0 5px rgba(125, 159, 225, 0.5);
 }
 
-.suggestions-list.night-mode {
-  border-color: #555;
-  background-color: #333;
-  color: white;
-}
-
-.suggestions-list li {
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.5s;
-}
-
-.suggestions-list li:hover {
-  background-color: #f1f1f1;
-}
-
-.suggestions-list.night-mode li:hover {
-  background-color: #555;
-}
-
-.error-container {
-  margin-top: 20px;
-  color: red;
-  background-color: #fdd;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background-color 0.5s, color 0.5s;
-}
-
-.error-container.night-mode {
-  background-color: #333;
-  color: white;
+.infield.night-mode:focus {
+  border-color: #9d9fe1;
+  box-shadow: 0 0 5px rgba(157, 159, 225, 0.5);
 }
 
 .but {
@@ -84,7 +40,7 @@
   border-radius: 15px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: background-color 0.5s ease;
 }
 
 .but.night-mode {
@@ -98,12 +54,4 @@
 
 .but.night-mode:hover {
   background-color: #555;
-}
-
-.but:active {
-  background-color: rgb(8, 72, 168);
-}
-
-.but.night-mode:active {
-  background-color: #222;
 }

@@ -4,7 +4,7 @@
    position: sticky;
    top: 0;
    width: 100%;
-   padding: 10px 20px; /* Added padding for spacing */
+   padding: 10px; /* Added padding for spacing */
    z-index: 1000;
    display: flex;
    justify-content: space-between; /* Ensures the moon icon is on the left and the share buttons are on the right */
@@ -34,4 +34,34 @@
 .share-buttons {
    display: flex;
    gap: 10px; /* Adjusts spacing between share buttons */
+}
+
+
+.modal-title h4{
+   background-color: rgb(255, 0, 0);
+   color: rgb(181, 115, 115);
+}
+.modal-title-h4.night-mode{
+   background-color: rgb(74, 73, 73);
+   color: rgb(0, 0, 0);
+}
+
+.modal-body{
+   background-color: rgb(255, 255, 255);
+   color: rgb(0, 0, 0);
+}
+.modal-body.night-mode{
+   background-color: rgb(74, 73, 73);
+}
+.modal-header{
+   background-color: white;
+   color:white;
+}
+
+.modal-header.night-mode{
+   background-color: rgb(74, 73, 73);
+}
+
+.modal-footer.night-mode{
+   background-color: rgb(74, 73, 73);
 }

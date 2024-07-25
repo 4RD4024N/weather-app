@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const openWeatherMapKey = process.env.REACT_APP_OPEN_WEATHER_MAP_KEY;
+
 export const fetchWeather = createAsyncThunk('weather/fetchWeather', async (city) => {
   const response = await axios.get(
     `https://api.openweathermap.org/data/2.5/forecast`, {
       params: {
         q: city,
         units: 'metric',
-        appid: openWeatherMapKey,
+        appid: process.env.REACT_APP_OPEN_WEATHER_MAP_KEY,
         lang: 'tr'
       }
     }
