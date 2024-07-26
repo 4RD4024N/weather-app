@@ -46,7 +46,12 @@ const Weather = () => {
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-GB', options);
+    return new Date(dateString).toLocaleDateString('tr-TR', options);
+  };
+
+  const formatTime = (dateString) => {
+    const options = { hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleTimeString('tr-TR', options);
   };
 
   const toggleDay = (day) => {
@@ -92,7 +97,7 @@ const Weather = () => {
                     <tbody>
                       {dailyWeather[day].map((forecast, index) => (
                         <tr key={index}>
-                          <td className={isNightMode ? 'night-mode' : ''}>{forecast.dt_txt.split(' ')[1]}</td>
+                          <td className={isNightMode ? 'night-mode' : ''}>{formatTime(forecast.dt_txt)}</td>
                           <td className={isNightMode ? 'night-mode' : ''}>{forecast.main.temp}°C</td>
                           <td className={isNightMode ? 'night-mode' : ''}>{forecast.weather[0].description}</td>
                           <td className={isNightMode ? 'night-mode' : ''}>
