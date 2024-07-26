@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCity, setSuggestions, clearError, fetchWeather, fetchCityInfo, setError } from '../weatherSlice';
 import { fetchNearbyPlaces, clearSearchResults } from '../searchSlice';
@@ -11,8 +11,7 @@ const CityInput = () => {
   const dispatch = useDispatch();
   const { city, suggestions, error } = useSelector((state) => state.weather);
   const { isNightMode } = useSelector((state) => state.theme);
-  const { map } = useSelector((state) => state.map);
-  const [searchInput, setSearchInput] = useState('');
+  const { email } = useSelector((state) => state.user);  // Kullanıcı email'ini al
   const searchInputRef = useRef(null);
 
   const getCitySuggestions = async (input) => {
@@ -77,17 +76,24 @@ const CityInput = () => {
   };
 
   const handleSearchButtonClick = () => {
-    if (searchInput.trim() && map) {
-      dispatch(fetchNearbyPlaces(searchInput));
-    } else {
-      dispatch(setError('Lütfen aramak istediğiniz yeri giriniz ve haritanın yüklendiğinden emin olun.'));
-    }
+    const keyword = searchInputRef.current.value;
+    dispatch(fetchNearbyPlaces(keyword));
+    saveSearchHistory(city, keyword);
   };
 
   const handleCloseError = () => {
     dispatch(clearError());
     dispatch(setCity(''));
     dispatch(setSuggestions([]));
+  };
+
+  const saveSearchHistory = (city, searchPlace) => {
+    const currentTime = new Date().toLocaleString();
+    const newSearch = { city, searchPlace, time: currentTime };
+
+    let searchHistory = JSON.parse(localStorage.getItem(email)) || [];
+    searchHistory.push(newSearch);
+    localStorage.setItem(email, JSON.stringify(searchHistory));
   };
 
   return (
@@ -109,14 +115,7 @@ const CityInput = () => {
         </ul>
       )}
       <button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearch}>Ara</button>
-      <input
-        type='text'
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
-        placeholder='Nereyi bulmak istersiniz?'
-        className={`infield ${isNightMode ? 'night-mode' : ''}`}
-        ref={searchInputRef}
-      />
+      <input type='text' ref={searchInputRef} placeholder='Nereyi bulmak istersiniz?' className={`infield ${isNightMode ? 'night-mode' : ''}`} />
       <Button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleSearchButtonClick}>Aranan yerleri Göster</Button>
       <a className={isNightMode ? 'night-mode' : ''} href="https://developers.google.com/maps/documentation/places/web-service/supported_types?hl=tr" target="_blank" rel="noopener noreferrer"> Click for supported keywords to search</a>
       {error && (

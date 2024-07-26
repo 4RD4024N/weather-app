@@ -1,3 +1,4 @@
+/* Navbar Styling */
 .navbar {
    background-color: rgb(124, 124, 124);
    color: white; 
@@ -15,6 +16,7 @@
    background-color: rgb(35, 34, 34);
 }
 
+/* Icon Group Styling */
 .icon-group {
    display: flex;
    align-items: center;
@@ -31,37 +33,70 @@
    color: yellow;
 }
 
+/* Share Buttons Styling */
 .share-buttons {
    display: flex;
    gap: 10px; /* Adjusts spacing between share buttons */
 }
 
-
-.modal-title h4{
-   background-color: rgb(255, 0, 0);
-   color: rgb(181, 115, 115);
-}
-.modal-title-h4.night-mode{
-   background-color: rgb(74, 73, 73);
-   color: rgb(0, 0, 0);
+/* Action Group Styling */
+.action-group {
+   display: flex;
+   align-items: center;
+   gap: 20px; /* Adjust gap as needed */
 }
 
-.modal-body{
+.logout-dropdown {
+  margin-left: 15px;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+}
+.tog{
+   color: red;
+   background-color: red;
+}
+
+
+/* Modal Styling */
+.modal-title {
    background-color: rgb(255, 255, 255);
    color: rgb(0, 0, 0);
 }
-.modal-body.night-mode{
+
+.modal-title.night-mode {
    background-color: rgb(74, 73, 73);
+   color: rgb(0, 0, 0);
 }
-.modal-header{
+
+.modal-body {
+   background-color: rgb(255, 255, 255);
+   color: rgb(0, 0, 0);
+}
+
+.modal-body.night-mode {
+   background-color: rgb(74, 73, 73);
+   color: rgb(255, 255, 255);
+}
+
+.modal-header {
    background-color: white;
-   color:white;
+   color: black;
 }
 
-.modal-header.night-mode{
+.modal-header.night-mode {
    background-color: rgb(74, 73, 73);
+   color: white;
 }
 
-.modal-footer.night-mode{
+.modal-footer {
+   background-color: white;
+   color: black;
+}
+
+.modal-footer.night-mode {
    background-color: rgb(74, 73, 73);
+   color: white;
 }
