@@ -12,19 +12,7 @@ export const fetchWeather = createAsyncThunk('weather/fetchWeather', async (city
       }
     }
   );
-
-  // Convert 3-hour interval data to 1-hour interval data
-  const hourlyData = response.data.list.flatMap((item) => {
-    const date = new Date(item.dt_txt);
-    const tempDiff = item.main.temp_max - item.main.temp_min;
-    return [
-      { ...item, dt_txt: new Date(date.getTime() + 0 * 60 * 60 * 1000).toISOString(), main: { ...item.main, temp: item.main.temp_min + tempDiff * 0.0 } },
-      { ...item, dt_txt: new Date(date.getTime() + 1 * 60 * 60 * 1000).toISOString(), main: { ...item.main, temp: item.main.temp_min + tempDiff * 0.33 } },
-      { ...item, dt_txt: new Date(date.getTime() + 2 * 60 * 60 * 1000).toISOString(), main: { ...item.main, temp: item.main.temp_min + tempDiff * 0.67 } }
-    ];
-  });
-
-  return { ...response.data, list: hourlyData };
+  return response.data;
 });
 
 export const fetchCityInfo = createAsyncThunk('weather/fetchCityInfo', async (city) => {
