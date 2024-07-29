@@ -1,52 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Form, Button, Container, Row, Col, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, ListGroup, Button } from 'react-bootstrap';
 import '../Profile.css';
 import Navbar from '../components/Navbar';
 
 const Profile = () => {
   const { isNightMode } = useSelector((state) => state.theme);
-  const { email } = useSelector((state) => state.user);  // Kullanıcı email'ini al
-  const [editMode, setEditMode] = useState(false);
-  const { currentUser } = useSelector((state) => state.theme);
-  const [profile, setProfile] = useState(() => {
-    
-    const savedProfile = localStorage.getItem('profile');
-    return savedProfile ? JSON.parse(savedProfile) : {
-      avatar: 'https://via.placeholder.com/150',
-      name: 'John Doe',
-      email: 'john.doe@example.com'
-    };
-  });
-  const [searchHistory, setSearchHistory] = useState(() => {
-    const savedHistory = localStorage.getItem(email);
-    return savedHistory ? JSON.parse(savedHistory) : [];
-  });
+  const { currentUser, isLoggedIn } = useSelector((state) => state.auth);
+
+  const [searchHistory, setSearchHistory] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem('profile', JSON.stringify(profile));
-  }, [profile]);
-
-  const handleEditClick = () => {
-    setEditMode(true);
-  };
-
-  const handleSaveClick = () => {
-    setEditMode(false);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProfile((prevProfile) => ({
-      ...prevProfile,
-      [name]: value
-    }));
-  };
+    if (currentUser && currentUser.email) {
+      const savedHistory = localStorage.getItem(currentUser.email);
+      setSearchHistory(savedHistory ? JSON.parse(savedHistory) : []);
+    }
+  }, [currentUser]);
 
   const handleClearSearchHistory = () => {
-    localStorage.removeItem(email);
-    setSearchHistory([]);
+    if (currentUser && currentUser.email) {
+      localStorage.removeItem(currentUser.email);
+      setSearchHistory([]);
+    }
   };
+
+  if (!isLoggedIn) {
+    return (
+      <Container className={`profile-container ${isNightMode ? 'night-mode' : ''}`}>
+        <Row className="justify-content-md-center">
+          <Col md="8">
+            <div className="profile-header">
+              <h2>No user logged in</h2>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
 
   return (
     <>
@@ -55,48 +45,10 @@ const Profile = () => {
         <Row className="justify-content-md-center">
           <Col md="8">
             <div className="profile-header">
-              <img src={profile.avatar} alt="Avatar" className="profile-avatar" />
-              <h2>{profile.name}</h2>
-              <p>{profile.email}</p>
-              {!editMode && <Button className={`but ${isNightMode ? 'night-mode' : ''}`} onClick={handleEditClick}>Edit Profile</Button>}
+              <img src={currentUser.avatar || 'https://via.placeholder.com/150'} alt="Avatar" className="profile-avatar" />
+              <h2>{currentUser.name}</h2>
+              <p>{currentUser.email}</p>
             </div>
-            {editMode && (
-              <Form>
-                <Form.Group controlId="formAvatar">
-                  <Form.Label>Avatar URL</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter avatar URL"
-                    name="avatar"
-                    value={profile.avatar}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formName">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter name"
-                    name="name"
-                    value={profile.name}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formEmail">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter email"
-                    name="email"
-                    value={profile.email}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Button variant="primary" onClick={handleSaveClick}>
-                  Save
-                </Button>
-              </Form>
-            )}
             <div className="search-history">
               <h3>Search History</h3>
               <ListGroup>

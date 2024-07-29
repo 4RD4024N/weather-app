@@ -50,7 +50,8 @@
   }
   
   .login-card .btn-primary.night-mode {
-    background-color: blueviolet;
+    background-color: #007bbf;
+    color: white;
   }
   
   .login-card .btn-primary:hover {
@@ -67,6 +68,7 @@
   
   .login-card .btn-link:hover {
     text-decoration: underline;
+    background-color: #0056b3;
   }
   
   .login-card .btn-link.night-mode {

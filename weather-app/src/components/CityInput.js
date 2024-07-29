@@ -11,7 +11,7 @@ const CityInput = () => {
   const dispatch = useDispatch();
   const { city, suggestions, error } = useSelector((state) => state.weather);
   const { isNightMode } = useSelector((state) => state.theme);
-  const { email } = useSelector((state) => state.user);  // Kullanıcı email'ini al
+  const { currentUser } = useSelector((state) => state.auth);  // Kullanıcı email'ini al
   const searchInputRef = useRef(null);
 
   const getCitySuggestions = async (input) => {
@@ -88,12 +88,15 @@ const CityInput = () => {
   };
 
   const saveSearchHistory = (city, searchPlace) => {
+    if (!currentUser || !currentUser.email) {
+      return;
+    }
     const currentTime = new Date().toLocaleString();
     const newSearch = { city, searchPlace, time: currentTime };
 
-    let searchHistory = JSON.parse(localStorage.getItem(email)) || [];
+    let searchHistory = JSON.parse(localStorage.getItem(currentUser.email)) || [];
     searchHistory.push(newSearch);
-    localStorage.setItem(email, JSON.stringify(searchHistory));
+    localStorage.setItem(currentUser.email, JSON.stringify(searchHistory));
   };
 
   return (
