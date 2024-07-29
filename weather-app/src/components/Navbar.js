@@ -74,7 +74,7 @@ const Navbar = () => {
         {isLoggedIn && (
           <div className="action-group">
             <Dropdown className="ml-3 logout-dropdown">
-              <Dropdown.Toggle className="tog" variant="link" id="dropdown-basic" >
+              <Dropdown.Toggle className="bt" variant="link" id="dropdown-basic" >
                 <FontAwesomeIcon icon={faSignOutAlt} size="2x" />
               </Dropdown.Toggle>
               <Dropdown.Menu alignRight>

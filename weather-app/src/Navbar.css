@@ -38,6 +38,13 @@
    display: flex;
    gap: 10px; /* Adjusts spacing between share buttons */
 }
+.bt.dropdown-toggle{
+   background-color: rgb(124, 124, 124);
+}
+.bt.dropdown-toggle.night-mode{
+   background-color: rgb(35, 34, 34);
+   
+}
 
 /* Action Group Styling */
 .action-group {
@@ -61,12 +68,12 @@
 
 
 /* Modal Styling */
-.modal-title {
+.modal-title h4 {
    background-color: rgb(255, 255, 255);
    color: rgb(0, 0, 0);
 }
 
-.modal-title.night-mode {
+.modal-title-h4.night-mode {
    background-color: rgb(74, 73, 73);
    color: rgb(0, 0, 0);
 }
